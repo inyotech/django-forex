@@ -1,5 +1,7 @@
 import sys
-sys.path.append("/Users/scottb/PycharmProjects/forex/forex")
+import os
+
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'forex'))
 
 import os
 import csv
