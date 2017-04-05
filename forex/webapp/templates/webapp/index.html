@@ -1,0 +1,72 @@
+{% load static %}
+{% load format_rates %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    {% block title %}<title>Foreign Exchange Rates</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'webapp/js/app.js' %}"></script>
+    <script src="{% static 'webapp/js/graph.js' %}"></script>
+    <!-- Add additional CSS in static file -->
+    <link rel="stylesheet" href="{% static 'webapp/css/styles.css' %}">
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+
+      <div class="row">
+	<div class="col-sm-2">
+	  {% block sidebar %}
+	  <ul class="sidebar-nav">
+	    <li>Stories Here</li>
+	  </ul>
+	  {% endblock %}
+	</div>
+	<div class="col-sm-10" id="currency-table">
+	  {% block content %}
+	  <fieldset>
+	    <legend>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</legend>
+	    <table>
+	      <tbody>
+		{% for row in rates|columns:3 %}
+		<tr>
+		  {% for rate in row %}
+		  <td id="currency-code-{{ rate.currency.currency_code }}" class="show-history" ><input type="checkbox" /></td>
+		  <td class="flag" ><img src="{% static 'rates/images/'|add:rate.currency.flag_image_file_name %}"/></td>
+                  <td class="country-name" >{{ rate.currency.country_name }}</td>
+                  <td class="currency-name" >{{ rate.currency.currency_name }}</td>
+                  <td class="currency-rate" >{{ rate.ratio|floatformat:2 }}</td>
+		  {% endfor %}
+		</tr>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		{% endfor %}
+	      </tbody>
+	    </table>
+	  </fieldset>
+	  {% endblock %}
+	  <div id="base-currency-select" >Select a base currency for conversions:
+	    <select class="currency_select" id="base_currency_select">
+	      {% for currency in currencies %}
+	      <option value="{{currency.currency_code}}" {% if currency.currency_code == base_currency_code %} selected="selected" {% endif %} >
+		{{currency.short_name}} {{currency.currency_name}}
+	      </option>
+	      {% endfor %}
+	    </select>
+	    <script>
+	    </script>
+	  </div>
+	</div>
+      </div>
+    </div>
+    <footer>
+    </footer>
+    {% block javascript %}{% endblock %}
+  </body>
+</html>

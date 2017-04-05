@@ -1,0 +1,47 @@
+#currency-table table {
+}
+
+#currency-table td {
+    padding: 0px;
+    margin: 0px;
+}
+
+#currency-table td.flag {
+    padding-left: 10px;
+}
+
+#currency-table td.currency-rate {
+    padding-right: 10px;
+    text-align: right;
+}
+
+#currency-table td.country-name {
+    padding-left: 10px;
+    text-align: left;
+}
+
+#currency-table td.currency-name {
+    padding-left: 10px;
+    text-align: left;
+}
+
+#currency-table td.currency-rate {
+    padding-left: 10px;
+    text-align: left;
+}
+
+#currency-table .flag img {
+    width: 20px;
+    height:15px;
+    vertical-align: middle;
+}
+
+#base-currency-select {
+    margin-top: 20px;
+}
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
