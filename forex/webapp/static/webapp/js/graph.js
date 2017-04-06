@@ -2,7 +2,7 @@ function display_all(data) {
     console.log('display', data);
 
     var margin = {top: 30, right: 20, bottom: 30, left: 50},
-        width = 600 - margin.left - margin.right,
+        width = 800 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
     var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -10,11 +10,15 @@ function display_all(data) {
     var x = d3.time.scale().range([0, width]);
     var y = d3.scale.linear().range([height, 0]);
 
-    var xAxis = d3.svg.axis().scale(x)
-        .orient("bottom").ticks(5);
+    var xAxis = d3.svg.axis()
+	.scale(x)
+        .orient("bottom")
+	.ticks(7);
 
-    var yAxis = d3.svg.axis().scale(y)
-        .orient("left").ticks(10);
+    var yAxis = d3.svg.axis()
+	.scale(y)
+        .orient("left")
+	.ticks(10);
 
     var entries = d3.entries(data);
 
@@ -62,16 +66,24 @@ function display_all(data) {
 
     var svg = d3.select('svg')
         .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-              "translate(" + margin.left + "," + margin.top + ")");
+        .attr("height", height + margin.top + margin.bottom);
+
+    var g = svg.append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     entries.forEach(function(d) {
-	svg.append("path")
+	g.append("path")
             .attr("class", "line")
             .attr("d", line(d.value.data));
     });
 
+    g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    g.append("g")
+        .attr("class", "axis axis--y")
+        .call(yAxis);
 
 }
