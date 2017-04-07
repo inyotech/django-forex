@@ -140,6 +140,7 @@ def current_rates(request, base='USD'):
            'target_currency.short_name, '
            'target_currency.currency_name, '
            'target_currency.currency_code, '
+           'target_currency.flag_image_file_name, '
            'target_rates.rate_date, '
            'target_rates.per_dollar / base_rates.per_dollar rate_ratio '
            'from exchange_rates target_rates '

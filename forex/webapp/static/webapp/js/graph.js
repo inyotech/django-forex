@@ -1,5 +1,4 @@
 function display_all(data) {
-    console.log('display', data);
 
     var margin = {top: 30, right: 20, bottom: 30, left: 50},
         width = 800 - margin.left - margin.right,
@@ -20,15 +19,11 @@ function display_all(data) {
 
     var entries = d3.entries(data);
 
-    console.log('entries', entries);
-
     var max_rate = d3.max(entries, function(d) {
         return d3.max(d.value.data, function(value_data) {
             return value_data.rate_ratio;
         });
     });
-
-    console.log('max rate', max_rate);
 
     var min_rate = d3.min(entries, function(d) {
         return d3.min(d.value.data, function(value_data) {
@@ -49,8 +44,6 @@ function display_all(data) {
             return parseDate(value_data.rate_date);
         });
     });
-
-    console.log('date extent', [min_date, max_date]);
 
     x.domain([min_date, max_date]);
 

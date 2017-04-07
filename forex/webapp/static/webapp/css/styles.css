@@ -36,6 +36,17 @@
     vertical-align: middle;
 }
 
+#currency-table #latest-rates td {
+    padding-left: 10px;
+    text-align: left;
+}
+
+#currency-table #latest-rates tr td img {
+    width: 20px;
+    height:15px;
+    vertical-align: middle;
+}
+
 #base-currency-select {
     margin-top: 20px;
     margin-bottom: 20px;

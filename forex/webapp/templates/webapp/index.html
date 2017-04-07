@@ -13,6 +13,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{% static 'webapp/js/app.js' %}"></script>
     <script src="{% static 'webapp/js/graph.js' %}"></script>
+    <script src="{% static 'webapp/js/latest_table.js' %}"></script>
     <!-- Add additional CSS in static file -->
     <link rel="stylesheet" href="{% static 'webapp/css/styles.css' %}">
     <style>
@@ -40,22 +41,8 @@
           {% block content %}
           <fieldset>
             <legend>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</legend>
-            <table>
-              <tbody>
-                {% for row in rates|columns:3 %}
-                <tr>
-                  {% for rate in row %}
-                  <td id="currency-code-{{ rate.currency.currency_code }}" class="show-history" ><input type="checkbox" /></td>
-                  <td class="flag" ><img src="{% static 'rates/images/'|add:rate.currency.flag_image_file_name %}"/></td>
-                  <td class="country-name" >{{ rate.currency.country_name }}</td>
-                  <td class="currency-name" >{{ rate.currency.currency_name }}</td>
-                  <td class="currency-rate" >{{ rate.ratio|floatformat:2 }}</td>
-                  {% endfor %}
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
           </fieldset>
+	  <table id="latest-rates"></table>
           {% endblock %}
           <div id="base-currency-select" >Select a base currency for conversions:
             <select class="currency-select" >
