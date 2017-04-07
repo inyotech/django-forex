@@ -5,19 +5,17 @@ function display_all(data) {
         width = 800 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
-    var parseDate = d3.time.format("%Y-%m-%d").parse;
+    var parseDate = d3.timeParse("%Y-%m-%d");
 
-    var x = d3.time.scale().range([0, width]);
-    var y = d3.scale.linear().range([height, 0]);
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
 
-    var xAxis = d3.svg.axis()
+    var xAxis = d3.axisBottom()
 	.scale(x)
-        .orient("bottom")
 	.ticks(7);
 
-    var yAxis = d3.svg.axis()
+    var yAxis = d3.axisLeft()
 	.scale(y)
-        .orient("left")
 	.ticks(10);
 
     var entries = d3.entries(data);
@@ -56,7 +54,7 @@ function display_all(data) {
 
     x.domain([min_date, max_date]);
 
-    var line = d3.svg.line()
+    var line = d3.line()
         .x(function(d) { return x(parseDate(d.rate_date)); })
         .y(function(d) {
             return y(d.rate_ratio);

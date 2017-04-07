@@ -6,9 +6,9 @@ from django.db import connection
 
 from rates.models import Rate, Currency, RateRatio
 
-def index(request, base='USD', target='EUR', months=6):
+def index(request, base='USD', target='EUR', months=24):
 
-    currencies = Currency.objects.all()
+    currencies = Currency.objects.all().order_by('country_name')
 
     base_currency_code = base
 
@@ -22,7 +22,7 @@ def index(request, base='USD', target='EUR', months=6):
 
     pprint.pprint(base_rate)
 
-    rates = Rate.objects.all().filter(rate_date=latest_rate_date['rate_date__max']).annotate(ratio=F('per_dollar')/base_rate.per_dollar).select_related()
+    rates = Rate.objects.all().filter(rate_date=latest_rate_date['rate_date__max']).annotate(ratio=F('per_dollar')/base_rate.per_dollar).select_related().order_by('currency__country_name')
 
     pprint.pprint(rates)
 

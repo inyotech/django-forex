@@ -16,10 +16,6 @@
     <!-- Add additional CSS in static file -->
     <link rel="stylesheet" href="{% static 'webapp/css/styles.css' %}">
     <style>
-      .axis path {
-          fill: none;
-          stroke: black;
-      }
       .line {
           fill: none;
           stroke: steelblue;
@@ -56,14 +52,13 @@
                   <td class="currency-rate" >{{ rate.ratio|floatformat:2 }}</td>
                   {% endfor %}
                 </tr>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
                 {% endfor %}
               </tbody>
             </table>
           </fieldset>
           {% endblock %}
           <div id="base-currency-select" >Select a base currency for conversions:
-            <select class="currency_select" id="base_currency_select">
+            <select class="currency-select" >
               {% for currency in currencies %}
               <option value="{{currency.currency_code}}" {% if currency.currency_code == base_currency_code %} selected="selected" {% endif %} >
                 {{currency.short_name}} {{currency.currency_name}}

@@ -74,7 +74,7 @@ class PaginatorObjectList:
 
         return execute_query(sql, params)
 
-def historic_rates(request, base='USD', target='EUR', months=6, page=None, per_page=10):
+def historic_rates(request, base='USD', target='EUR', months=24, page=None, per_page=10):
 
     sql = ('select '
            'country_name, '

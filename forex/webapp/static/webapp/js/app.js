@@ -16,8 +16,6 @@ var selected_currencies = [];
 
 function show_selected_currencies() {
 
-    console.log('called');
-
     var selected_currencies = []
     $('.show-history input:checked').each(function () {
 	var parent = $(this).parent('td');
@@ -36,13 +34,17 @@ function show_selected_currencies() {
     deferreds = [];
     $.each(selected_currencies, function (index, value) {
 
+	console.log('currency_data', currency_data);
+
 	if (value in currency_data) {
 	    console.log('exists', value);
 	    return;
 	}
 
+	var base = $('#base-currency-select select.currency-select').val();
+
 	deferreds.push($.ajax({
-	    url: '/historic_rates/base/EUR/target/' + value + '/',
+	    url: '/historic_rates/base/' + base + '/target/' + value + '/',
 	    success: function(result) {
 		currency_data[result.target.currency_code] = result;
 	    }
@@ -69,7 +71,10 @@ $(document).ready(function() {
 	show_selected_currencies();
     })
 
-
+    $('#base-currency-select select.currency-select').change(function() {
+	console.log($(this).val());
+	window.location = '/rates/base/' + $(this).val() + '/months/24';
+    });
 });
 
 $(document).ready(function() {
