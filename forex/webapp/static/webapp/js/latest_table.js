@@ -11,7 +11,7 @@ function new_base(base) {
 
 function update_latest(data) {
 
-    var columns = 3;
+    var columns = 4;
     var col_length = Math.ceil(data.data.length/columns);
     var columnized_data = [];
 

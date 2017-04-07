@@ -27,8 +27,12 @@ function show_selected_currencies() {
 
 	var base = $('#base-currency-select select.currency-select').val();
 
+	var months = $('#timespan-select input[name=timespan-select-button]:checked').val();
+
+	console.log('months', months);
+
 	deferreds.push($.ajax({
-	    url: '/historic_rates/base/' + base + '/target/' + value + '/',
+	    url: '/historic_rates/base/' + base + '/target/' + value + '/months/' + months,
 	    success: function(result) {
 		currency_data[result.target.currency_code] = result;
 	    }
@@ -53,4 +57,9 @@ $(document).ready(function() {
 	new_base($(this).val());
     });
 
+    $('#timespan-select input[name=timespan-select-button').change(function() {
+	console.log($(this).val());
+	currency_data = {};
+	show_selected_currencies();
+    });
 });

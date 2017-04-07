@@ -76,6 +76,8 @@ class PaginatorObjectList:
 
 def historic_rates(request, base='USD', target='EUR', months=24, page=None, per_page=10):
 
+    months = int(months)
+
     sql = ('select '
            'country_name, '
            'short_name, '

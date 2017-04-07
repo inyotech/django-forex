@@ -27,17 +27,10 @@
 
   <body>
 
-    <div class="container-fluid">
+    <div class="container">
 
       <div class="row">
-        <div class="col-sm-2">
-          {% block sidebar %}
-          <ul class="sidebar-nav">
-            <li>Stories Here</li>
-          </ul>
-          {% endblock %}
-        </div>
-        <div class="col-sm-10" id="currency-table">
+        <div class="col-sm-12" id="currency-table">
           {% block content %}
           <fieldset>
             <legend>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</legend>
@@ -52,11 +45,32 @@
               </option>
               {% endfor %}
             </select>
-            <script>
-            </script>
           </div>
-          <svg></svg>
+	  <div id="timespan-select" >Select a time range to view:
+	    6 months
+	    <input type="radio" name="timespan-select-button" value="6">
+	    1 year
+	    <input type="radio" name="timespan-select-button" value="12">
+	    2 years
+	    <input type="radio" name="timespan-select-button" value="24" checked="checked">
+	    3 years
+	    <input type="radio" name="timespan-select-button" value="36">
+	    5 years
+	    <input type="radio" name="timespan-select-button" value="60">
+	  </div>
         </div>
+      </div>
+      <div class="row">
+	<div class="col-sm-10">
+          <svg></svg>
+	</div>
+	<div class="col-sm-2">
+          {% block sidebar %}
+          <ul class="sidebar-nav">
+            <li>Stories Here</li>
+        </ul>
+        {% endblock %}
+      </div>
       </div>
     </div>
     <footer>
