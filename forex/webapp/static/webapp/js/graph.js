@@ -53,6 +53,8 @@ function display_all(data) {
             return y(d.rate_ratio);
         });
 
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+
     d3.selectAll('svg > *').remove();
 
     var svg = d3.select('svg')
@@ -65,6 +67,9 @@ function display_all(data) {
     entries.forEach(function(d) {
 	g.append("path")
             .attr("class", "line")
+	    .style('stroke', function() {
+		return d.color = color(d.key);
+	    })
             .attr("d", line(d.value.data));
     });
 
