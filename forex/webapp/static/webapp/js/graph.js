@@ -1,8 +1,8 @@
 function display_all(data) {
 
-    var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    var margin = {top: 30, right: 20, bottom: 80, left: 50},
         width = 800 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        height = 500 - margin.top - margin.bottom;
 
     var parseDate = d3.timeParse("%Y-%m-%d");
 
@@ -57,6 +57,8 @@ function display_all(data) {
 
     d3.selectAll('svg > *').remove();
 
+    legend_space = width / entries.length;
+
     var svg = d3.select('svg')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
@@ -64,13 +66,22 @@ function display_all(data) {
     var g = svg.append("g")
 	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    entries.forEach(function(d) {
+    entries.forEach(function(d, i) {
+
 	g.append("path")
             .attr("class", "line")
 	    .style('stroke', function() {
 		return d.color = color(d.key);
 	    })
             .attr("d", line(d.value.data));
+
+	g.append("text")
+	    .attr("x", (legend_space/2)+i*legend_space)
+	    .attr("y", height + (margin.bottom/2)+ 5)
+	    .attr("class", "legend")
+	    .style("fill", function() {
+		return d.color = color(d.key); })
+	    .text(d.key);
     });
 
     g.append("g")

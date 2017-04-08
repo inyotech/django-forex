@@ -57,3 +57,9 @@
     padding: 0;
     list-style: none;
 }
+
+.legend {
+    font-size: 16px;
+    font-weight: bold;
+    text-anchor: middle;
+}
