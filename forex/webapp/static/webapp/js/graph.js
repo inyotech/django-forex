@@ -17,35 +17,27 @@ function display_rate_history(data) {
         .scale(y)
         .ticks(10);
 
-    var entry_data = {};
-    entry_data[data.target.currency_code] = data;
+    var entries = {
+	key: data.target.currency_code,
+	value: data.data
+    };
 
-    var entries = d3.entries(entry_data);
-
-    var max_rate = d3.max(entries, function(d) {
-        return d3.max(d.value.data, function(value_data) {
-            return value_data.rate_ratio;
-        });
+    var max_rate = d3.max(entries.value, function(d) {
+        return d.rate_ratio;
     });
 
-    var min_rate = d3.min(entries, function(d) {
-        return d3.min(d.value.data, function(value_data) {
-            return value_data.rate_ratio;
-        });
+    var min_rate = d3.min(entries.value, function(d) {
+        return d.rate_ratio;
     });
 
     y.domain([min_rate, max_rate]);
 
-    var min_date = d3.min(entries, function(d) {
-        return d3.min(d.value.data, function(value_data) {
-            return parseDate(value_data.rate_date);
-        });
+    var min_date = d3.min(entries.value, function(d) {
+        return parseDate(d.rate_date);
     });
 
-    var max_date = d3.max(entries, function(d) {
-        return d3.max(d.value.data, function(value_data) {
-            return parseDate(value_data.rate_date);
-        });
+    var max_date = d3.max(entries.value, function(d) {
+        return parseDate(d.rate_date);
     });
 
     x.domain([min_date, max_date]);
@@ -60,8 +52,6 @@ function display_rate_history(data) {
 
     d3.selectAll('svg > *').remove();
 
-    legend_space = width / entries.length;
-
     var svg = d3.select('svg')
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
@@ -69,23 +59,23 @@ function display_rate_history(data) {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    entries.forEach(function(d, i) {
+    g.append("path")
+        .attr("class", "line")
+        .style('stroke', function() {
+            return color(entries.key);
+        })
+        .attr("d", line(entries.value));
 
-        g.append("path")
-            .attr("class", "line")
-            .style('stroke', function() {
-                return d.color = color(d.key);
-            })
-            .attr("d", line(d.value.data));
+    legend_space = width;
 
-        g.append("text")
-            .attr("x", (legend_space/2)+i*legend_space)
-            .attr("y", height + (margin.bottom/2)+ 5)
-            .attr("class", "legend")
-            .style("fill", function() {
-                return d.color = color(d.key); })
-            .text(d.key);
-    });
+    g.append("text")
+        .attr("x", (legend_space/2))
+        .attr("y", height + (margin.bottom/2)+ 5)
+        .attr("class", "legend")
+        .style("fill", function() {
+            return color(entries.key);
+	})
+        .text(entries.key);
 
     g.append("g")
         .attr("class", "axis axis--x")
