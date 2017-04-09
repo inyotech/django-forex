@@ -40,7 +40,7 @@
           <div id="base-currency-select" >Select a base currency for conversions:
             <select class="currency-select" >
               {% for currency in currencies %}
-              <option value="{{currency.currency_code}}" {% if currency.currency_code == base_currency_code %} selected="selected" {% endif %} >
+              <option value="{{currency.currency_code}}" {% if currency.currency_code == 'EUR' %} selected="selected" {% endif %} >
                 {{currency.short_name}} {{currency.currency_name}}
               </option>
               {% endfor %}

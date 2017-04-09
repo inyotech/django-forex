@@ -1,4 +1,4 @@
-function display_all(data) {
+function display_rate_history(data) {
 
     var margin = {top: 30, right: 20, bottom: 80, left: 50},
         width = 800 - margin.left - margin.right,
@@ -10,14 +10,17 @@ function display_all(data) {
     var y = d3.scaleLinear().range([height, 0]);
 
     var xAxis = d3.axisBottom()
-	.scale(x)
-	.ticks(7);
+        .scale(x)
+        .ticks(7);
 
     var yAxis = d3.axisLeft()
-	.scale(y)
-	.ticks(10);
+        .scale(y)
+        .ticks(10);
 
-    var entries = d3.entries(data);
+    var entry_data = {};
+    entry_data[data.target.currency_code] = data;
+
+    var entries = d3.entries(entry_data);
 
     var max_rate = d3.max(entries, function(d) {
         return d3.max(d.value.data, function(value_data) {
@@ -64,24 +67,24 @@ function display_all(data) {
         .attr("height", height + margin.top + margin.bottom);
 
     var g = svg.append("g")
-	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     entries.forEach(function(d, i) {
 
-	g.append("path")
+        g.append("path")
             .attr("class", "line")
-	    .style('stroke', function() {
-		return d.color = color(d.key);
-	    })
+            .style('stroke', function() {
+                return d.color = color(d.key);
+            })
             .attr("d", line(d.value.data));
 
-	g.append("text")
-	    .attr("x", (legend_space/2)+i*legend_space)
-	    .attr("y", height + (margin.bottom/2)+ 5)
-	    .attr("class", "legend")
-	    .style("fill", function() {
-		return d.color = color(d.key); })
-	    .text(d.key);
+        g.append("text")
+            .attr("x", (legend_space/2)+i*legend_space)
+            .attr("y", height + (margin.bottom/2)+ 5)
+            .attr("class", "legend")
+            .style("fill", function() {
+                return d.color = color(d.key); })
+            .text(d.key);
     });
 
     g.append("g")

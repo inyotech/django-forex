@@ -3,8 +3,14 @@ function new_base(base) {
     $.ajax({
         url: '/current_rates/base/' + base + '/',
         success: function(response) {
+
             update_latest(response);
-	    show_selected_currencies();
+
+            var target = d3.select('input.target-select:checked').attr('id');
+            var base = d3.select('#base-currency-select select.currency-select').property('value');
+            var months = d3.select('#timespan-select input[name=timespan-select-button]:checked').property('value');
+
+            show_selected_currency(target, base, months);
         }
     });
 }
@@ -21,7 +27,13 @@ function update_latest(data) {
 
     var table = d3.select('#currency-table').selectAll('table#latest-rates');
 
-    var selected = table.selectAll('input:checked');
+    var target_currency = table.select('input.target-select:checked');
+
+    if (target_currency.empty()) {
+        target_currency = 'USD';
+    } else {
+        target_currency = target_currency.attr('id');
+    }
 
     var tbodies = table.selectAll('tbody').data(columnized_data);
 
@@ -49,7 +61,7 @@ function update_latest(data) {
 
     var cells = rows.selectAll('td').data(function(d) {
         return [
-            '<input type="checkbox" class="target-select" id="' + d.currency_code + '" />',
+            '<input type="radio" name="target-currency-select" class="target-select" id="' + d.currency_code + '" />',
             '<img src="/static/rates/images/' + d.flag_image_file_name + '" />',
             d.country_name,
             d.currency_name,
@@ -67,24 +79,20 @@ function update_latest(data) {
         return d;
     });
 
-    selector_list = $.map(selected_currencies, function(d) {
-        cells.select('input#' + d).property('checked', true);
-    });
+    if (!target_currency) {
+        target_currency = 'USD';
+    }
+
+    cells.select('input.target-select#' + target_currency).property('checked', true);
 
     cells.selectAll('input').on('change', function(d) {
         var selected_id = this.getAttribute('id');
-        var index = $.inArray(selected_id, selected_currencies);
-        if (this.checked) {
-            if (index === -1 ) {
-                selected_currencies.push(selected_id);
-            }
-        } else {
-            if (index !== -1) {
-                selected_currencies.splice(index, 1);
-            }
-        }
 
-        show_selected_currencies();
+        var target = d3.select('input.target-select:checked').property('id');
+        var base = d3.select('#base-currency-select select.currency-select').property('value');
+        var months = d3.select('#timespan-select input[name=timespan-select-button]:checked').property('value');
+
+        show_selected_currency(target, base, months);
 
     });
 }
