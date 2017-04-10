@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'webapp.apps.WebappConfig',
     'rates.apps.RatesConfig',
+    'stories.apps.StoriesConfig',
 ]
 
 MIDDLEWARE = [

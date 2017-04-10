@@ -10,6 +10,10 @@ function show_current() {
 
     var table = d3.select('#currency-table').selectAll('table#latest-rates');
 
+    var base_name = current_rates.base.short_name + ' ' + current_rates.base.currency_name;
+    table.select('caption')
+        .html('Global Exchange Rates Based On ' + base_name + ', ' + current_rates.data[0].rate_date);
+
     var target_currency = table.select('input.target-select:checked');
 
     if (target_currency.empty()) {

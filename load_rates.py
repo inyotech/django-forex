@@ -15,7 +15,7 @@ django.setup()
 
 from rates.models import Currency, Rate
 
-import downloader
+import rate_downloader as downloader
 
 all_currencies = Currency.objects.all()
 

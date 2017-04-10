@@ -66,17 +66,6 @@ function show_historic_graph() {
         })
         .attr("d", line(entries.value));
 
-    legend_space = width;
-
-    g.append("text")
-        .attr("x", (legend_space/2))
-        .attr("y", height + (margin.bottom/2)+ 5)
-        .attr("class", "legend")
-        .style("fill", function() {
-            return color(entries.key);
-	})
-        .text(entries.key);
-
     g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
@@ -86,4 +75,13 @@ function show_historic_graph() {
         .attr("class", "axis axis--y")
         .call(yAxis);
 
+    var title_text = historic_rates.target.short_name + ' ' + historic_rates.target.currency_name + ' vs '
+        + historic_rates.base.short_name + ' ' + historic_rates.base.currency_name;
+
+    g.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "14px")
+        .text(title_text);
 }
