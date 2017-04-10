@@ -63,3 +63,24 @@
     font-weight: bold;
     text-anchor: middle;
 }
+
+/* override bootstrap default */
+#historic-table .table>tbody+tbody {
+    border-top: inherit;
+}
+
+#historic-table tbody {
+    margin-left: 4px;
+}
+
+#historic-table table td.date {
+    border-left: 1px solid #ddd;
+}
+
+#historic-table table td.rate {
+    border-right: 1px solid #ddd;
+}
+
+#historic-table table tbody tr:last-child {
+    border-bottom: 1px solid #ddd;
+}

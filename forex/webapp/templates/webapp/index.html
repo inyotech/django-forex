@@ -32,10 +32,7 @@
       <div class="row">
         <div class="col-sm-12" id="currency-table">
           {% block content %}
-          <fieldset>
-            <legend>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</legend>
-          </fieldset>
-	  <table id="latest-rates"></table>
+	  <table id="latest-rates"><caption>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</caption></table>
           {% endblock %}
           <div id="base-currency-select" >Select a base currency for conversions:
             <select class="currency-select" >
@@ -61,8 +58,10 @@
         </div>
       </div>
       <div class="row">
-	<div class="col-sm-10">
+	<div class="col-sm-10" id="historic-table">
           <svg></svg>
+          <table id="historic-rates" class="table table-striped" ><caption>Tabular Data</caption></table>
+          <div>pager</div>
 	</div>
 	<div class="col-sm-2">
           {% block sidebar %}
