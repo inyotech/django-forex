@@ -5,6 +5,8 @@ var current_rates = [];
 var months_history = 24;
 var historic_rates = [];
 
+var paginated_historic_rates = [];
+
 function load_current() {
 
     return $.ajax({
@@ -28,7 +30,19 @@ function load_historic() {
 
 function show_historic() {
     show_historic_graph();
-    show_historic_table();
+
+    paginate_historic_rates();
+
+    $('#pagination-demo').twbsPagination('destroy');
+
+    $('#pagination-demo').twbsPagination({
+        totalPages: paginated_historic_rates.length,
+        onPageClick: function (event, page) {
+            show_historic_table(page);
+        }
+    });
+
+    show_historic_table(1);
 }
 
 function show_historic_table() {
@@ -68,4 +82,5 @@ $(document).ready(function() {
         });
 
     });
+
 });

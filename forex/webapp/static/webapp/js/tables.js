@@ -79,32 +79,13 @@ function show_current() {
     });
 }
 
-function show_historic_table() {
+function show_historic_table(page) {
 
     console.log('historic_table');
 
-    var columns = 5;
-    var column_length = Math.ceil(historic_rates.data.length/columns);
-    var columnized_data = [];
-
-    for (i=0, j=historic_rates.data.length; i<j; i+=column_length) {
-        columnized_data.push(historic_rates.data.slice(i, i+column_length));
-    }
-
-    var page_length = 10;
-    var page_data = [];
-
-    for (i=0; i<column_length; i+=page_length) {
-        var page_columns = []
-        for (j=0; j<columns; j++) {
-            page_columns.push(columnized_data[j].slice(i, i+page_length));
-        }
-        page_data.push(page_columns);
-    }
-
     var table = d3.select('#historic-table').selectAll('table#historic-rates');
 
-    var tbodies = table.selectAll('tbody').data(page_data[0]);
+    var tbodies = table.selectAll('tbody').data(paginated_historic_rates[page-1]);
 
     tbodies.exit().remove();
 
@@ -135,7 +116,7 @@ function show_historic_table() {
     var cells = rows.selectAll('td').data(function(d) {
         return [
             d.rate_date,
-            d.rate_ratio
+            d3.format('.02f')(d.rate_ratio)
         ];
     });
 
@@ -154,5 +135,23 @@ function show_historic_table() {
             return 'rate';
         }
     });
+
+}
+
+function paginate_historic_rates() {
+
+    var columns = 5;
+    var page_length = 10;
+    var column_data = [];
+
+    paginated_historic_rates = [];
+
+    for (i=0; i<historic_rates.data.length; i+=page_length) {
+        column_data.push(historic_rates.data.slice(i, i+page_length));
+    }
+
+    for (i=0; i<column_data.length; i+=columns) {
+        paginated_historic_rates.push(column_data.slice(i, i+columns));
+    }
 
 }
