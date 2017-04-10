@@ -1,28 +1,11 @@
-function new_base(base) {
-
-    $.ajax({
-        url: '/current_rates/base/' + base + '/',
-        success: function(response) {
-
-            update_latest(response);
-
-            var target = d3.select('input.target-select:checked').attr('id');
-            var base = d3.select('#base-currency-select select.currency-select').property('value');
-            var months = d3.select('#timespan-select input[name=timespan-select-button]:checked').property('value');
-
-            show_selected_currency(target, base, months);
-        }
-    });
-}
-
-function update_latest(data) {
+function show_current() {
 
     var columns = 4;
-    var col_length = Math.ceil(data.data.length/columns);
+    var col_length = Math.ceil(current_rates.data.length/columns);
     var columnized_data = [];
 
-    for (i=0, j=data.data.length; i<j; i+=col_length) {
-        columnized_data.push(data.data.slice(i, i+col_length));
+    for (i=0, j=current_rates.data.length; i<j; i+=col_length) {
+        columnized_data.push(current_rates.data.slice(i, i+col_length));
     }
 
     var table = d3.select('#currency-table').selectAll('table#latest-rates');
@@ -86,13 +69,12 @@ function update_latest(data) {
     cells.select('input.target-select#' + target_currency).property('checked', true);
 
     cells.selectAll('input').on('change', function(d) {
-        var selected_id = this.getAttribute('id');
 
-        var target = d3.select('input.target-select:checked').property('id');
-        var base = d3.select('#base-currency-select select.currency-select').property('value');
-        var months = d3.select('#timespan-select input[name=timespan-select-button]:checked').property('value');
+        target_code = this.id;
 
-        show_selected_currency(target, base, months);
+        load_historic().success(function() {
+            show_historic();
+        });
 
     });
 }

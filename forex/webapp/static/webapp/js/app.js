@@ -1,29 +1,71 @@
-function show_selected_currency(target, base, months) {
+var target_code = 'USD';
+var base_code = 'EUR';
+var current_rates = [];
 
-    $.ajax({
-	url: '/historic_rates/base/' + base + '/target/' + target + '/months/' + months,
-	success: function(result) {
-	    display_rate_history(result);
-	}
+var months_history = 24;
+var historic_rates = [];
+
+function load_current() {
+
+    return $.ajax({
+        url: '/current_rates/base/' + base_code + '/',
+        success: function(response) {
+	    current_rates = response;
+        }
     });
+}
+
+function load_historic() {
+
+    return $.ajax({
+	url: '/historic_rates/base/' + base_code + '/target/' + target_code + '/months/' + months_history,
+        success: function(response) {
+            historic_rates = response;
+        }
+    });
+
+}
+
+function show_historic() {
+    show_historic_graph();
+    show_historic_table();
+}
+
+function show_historic_table() {
+    console.log('show_historic_table');
 }
 
 $(document).ready(function() {
 
-    base = 'EUR';
+    load_current().success(function() {
+        show_current();
+    });
 
-    new_base(base);
+    load_historic().success(function() {
+        show_historic();
+    });
 
     $('#base-currency-select select.currency-select').change(function() {
-	new_base($(this).val());
-    });
+        console.log('base change');
+	base_code = $(this).val();
+
+	load_current().success(function() {
+            show_current();
+        });
+
+        load_historic().success(function() {
+            show_historic();
+        });
+
+   });
 
     $('#timespan-select input[name=timespan-select-button]').change(function() {
 
-        var target = $('input.target-select:checked').attr('id');
-        var base = $('#base-currency-select select.currency-select').val()
-        var months = $('#timespan-select input[name=timespan-select-button]:checked').val();
+        months_history = $('#timespan-select input[name=timespan-select-button]:checked').val();
 
-	show_selected_currency(target, base, months);
+        load_historic().success(function() {
+            show_historic();
+        });
+
     });
 });

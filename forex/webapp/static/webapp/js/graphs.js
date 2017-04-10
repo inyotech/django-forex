@@ -1,4 +1,4 @@
-function display_rate_history(data) {
+function show_historic_graph() {
 
     var margin = {top: 30, right: 20, bottom: 80, left: 50},
         width = 800 - margin.left - margin.right,
@@ -18,8 +18,8 @@ function display_rate_history(data) {
         .ticks(10);
 
     var entries = {
-	key: data.target.currency_code,
-	value: data.data
+	key: historic_rates.target.currency_code,
+	value: historic_rates.data
     };
 
     var max_rate = d3.max(entries.value, function(d) {
