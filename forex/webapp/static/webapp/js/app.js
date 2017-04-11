@@ -56,10 +56,6 @@ function show_historic() {
     show_historic_table(1);
 }
 
-function show_historic_table() {
-    console.log('show_historic_table');
-}
-
 $(document).ready(function() {
 
     load_current().success(function() {
@@ -75,7 +71,7 @@ $(document).ready(function() {
     });
 
     $('#base-currency-select select.currency-select').change(function() {
-        console.log('base change');
+
 	base_code = $(this).val();
 
 	load_current().success(function() {

@@ -46,6 +46,15 @@ function show_current() {
 
     rows.order();
 
+    var total_delay = 250;
+    var delay_per_row = total_delay/rows.size();
+
+    var i = 0;
+    rows.style('opacity', 0)
+        .transition()
+        .delay(function() { return i++ * delay_per_row; })
+        .style('opacity', 1);
+
     var cells = rows.selectAll('td').data(function(d) {
         return [
             '<input type="radio" name="target-currency-select" class="target-select" id="' + d.currency_code + '" />',
@@ -85,8 +94,6 @@ function show_current() {
 
 function show_historic_table(page) {
 
-    console.log('historic_table');
-
     var table = d3.select('#historic-table').selectAll('table#historic-rates');
 
     var tbodies = table.selectAll('tbody').data(paginated_historic_rates[page-1]);
@@ -117,6 +124,15 @@ function show_historic_table(page) {
         }
     });
 
+    var total_delay = 250;
+    var delay_per_row = total_delay/rows.size();
+
+    var i = 0;
+    rows.style('opacity', 0)
+        .transition()
+        .delay(function() { return i++ * delay_per_row; })
+        .style('opacity', 1);
+
     var cells = rows.selectAll('td').data(function(d) {
         return [
             d.rate_date,
@@ -124,9 +140,12 @@ function show_historic_table(page) {
         ];
     });
 
-    cells.exit().remove();
+    cells.exit()
+        .remove();
 
-    cells = cells.enter().append('td').merge(cells);
+    cells = cells.enter()
+        .append('td')
+        .merge(cells);
 
     cells.order();
 

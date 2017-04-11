@@ -59,12 +59,24 @@ function show_historic_graph() {
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    g.append("path")
+
+    var path = g.append("path")
         .attr("class", "line")
         .style('stroke', function() {
             return color(entries.key);
         })
         .attr("d", line(entries.value));
+
+    var t = d3.transition()
+        .ease(d3.easeLinear)
+        .duration(300);
+
+    var path_length = path.node().getTotalLength();
+
+    path.attr("stroke-dasharray", path_length + " " + path_length)
+        .attr("stroke-dashoffset", path_length)
+        .transition(t)
+        .attr("stroke-dashoffset", 0);
 
     g.append("g")
         .attr("class", "axis axis--x")
