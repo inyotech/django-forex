@@ -1,4 +1,5 @@
 #currency-table table {
+    margin-bottom: 20px;
 }
 
 #currency-table td {
@@ -48,8 +49,7 @@
 }
 
 #base-currency-select {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin: 20px auto;
 }
 
 .sidebar-nav {
@@ -77,4 +77,18 @@
 
 #historic-table table tbody tr:last-child {
     border-bottom: 1px solid #ddd;
+}
+
+#historic-table table {
+    width: auto;
+    margin: 0 auto;
+}
+
+#historic-table svg {
+    display: block;
+    margin: 20px auto;
+}
+
+#controls {
+    text-align: center;
 }

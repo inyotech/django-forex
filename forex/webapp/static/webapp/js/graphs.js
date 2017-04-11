@@ -1,7 +1,7 @@
 function show_historic_graph() {
 
-    var margin = {top: 30, right: 20, bottom: 80, left: 50},
-        width = 600 - margin.left - margin.right,
+    var margin = {top: 30, right: 20, bottom: 20, left: 50},
+        width = 700 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
     var parseDate = d3.timeParse("%Y-%m-%d");
@@ -58,7 +58,6 @@ function show_historic_graph() {
 
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 
     var path = g.append("path")
         .attr("class", "line")
