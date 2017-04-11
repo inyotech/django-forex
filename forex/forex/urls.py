@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('webapp.urls')),
     url(r'^', include('rates.urls')),
+    url(r'^', include('stories.urls')),
 ]

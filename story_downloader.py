@@ -13,6 +13,7 @@ class Downloader:
         for url in self.feed_urls:
             s = feedparser.parse(url)
             for entry in s.entries:
+                entry['feed_url'] = url
                 yield entry;
 
 
@@ -25,5 +26,6 @@ if __name__ == '__main__':
         print(story.title)
         print(story.description)
         print(story.link)
+        print(story.published_parsed)
         print()
         

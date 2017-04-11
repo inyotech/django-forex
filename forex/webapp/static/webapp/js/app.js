@@ -7,6 +7,8 @@ var historic_rates = [];
 
 var paginated_historic_rates = [];
 
+var stories = null;
+
 function load_current() {
 
     return $.ajax({
@@ -26,6 +28,15 @@ function load_historic() {
         }
     });
 
+}
+
+function load_stories() {
+    return $.ajax({
+        url: '/stories/10/',
+        success: function(response) {
+            stories = response;
+        }
+    });
 }
 
 function show_historic() {
@@ -57,6 +68,10 @@ $(document).ready(function() {
 
     load_historic().success(function() {
         show_historic();
+    });
+
+    load_stories().success(function() {
+        show_stories();
     });
 
     $('#base-currency-select select.currency-select').change(function() {

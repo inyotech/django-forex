@@ -6,6 +6,7 @@ class Story(models.Model):
     description = models.TextField()
     link = models.CharField(max_length=255)
     feed_url = models.CharField(max_length=255)
+    published_date = models.DateTimeField()
     created_date = models.DateTimeField()
 
     class Meta:
@@ -14,5 +15,5 @@ class Story(models.Model):
 
     def __str__(self):
 
-        return "{0.id, 0.title}".format(self)
+        return "{0.id}, {0.title}".format(self)
 

@@ -9,7 +9,7 @@ import requests
 
 class Downloader:
 
-    rates_url = 'https://www.federalreserve.gov/datadownload/Output.aspx?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&from=03/01/2015&to=04/06/2017&filetype=csv&label=include&layout=seriescolumn'
+    rates_url = 'https://www.federalreserve.gov/datadownload/Output.aspx?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&from=3/01/2017&to=04/10/2017&filetype=csv&label=include&layout=seriescolumn'
 
     def __init__(self):
         self.raw_rate_data = None

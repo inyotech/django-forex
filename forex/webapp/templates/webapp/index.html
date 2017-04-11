@@ -18,6 +18,7 @@
     <script src="{% static 'webapp/js/app.js' %}"></script>
     <script src="{% static 'webapp/js/graphs.js' %}"></script>
     <script src="{% static 'webapp/js/tables.js' %}"></script>
+    <script src="{% static 'webapp/js/stories.js' %}"></script>
     <!-- Add additional CSS in static file -->
     <link rel="stylesheet" href="{% static 'webapp/css/styles.css' %}">
     <style>
@@ -62,17 +63,14 @@
         </div>
       </div>
       <div class="row">
-	<div class="col-sm-10" id="historic-table">
+	<div class="col-sm-9" id="historic-table">
           <svg></svg>
           <table id="historic-rates" class="table table-striped" ><caption>Tabular Data</caption></table>
           <ul id="pagination-demo" class="pagination-sm pagination" ></ul>
 	</div>
-	<div class="col-sm-2">
+	<div id="news" class="col-sm-3">
           {% block sidebar %}
-          <ul class="sidebar-nav">
-            <li>Stories Here</li>
-        </ul>
-        {% endblock %}
+          {% endblock %}
       </div>
       </div>
     </div>
