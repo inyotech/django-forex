@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" />
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -33,16 +34,16 @@
   <body>
 
     <div class="container">
-
       <div class="row">
         <div class="col-sm-12" id="currency-table">
-          {% block content %}
-	  <table id="latest-rates"><caption>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</caption></table>
-          {% endblock %}
+          <div class="inner">
+	    <table id="latest-rates"><caption>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</caption></table>
+          </div>
         </div>
       </div>
       <div class="row">
 	<div class="col-sm-9" id="historic-table">
+          <div class="inner" >
           <svg></svg>
           <div id="controls" >
             <div id="base-currency-select" >Base Currency:
@@ -77,15 +78,15 @@
               </tr>
             </tfoot>
           </table>
-
+          </div>
 	</div>
-	<div class="col-sm-3">
-	  <fieldset id="news">
-	    <legend>Financial Stories</legend>
-	  </fieldset>
-          {% block sidebar %}
-          {% endblock %}
-	</div>
+	<div class="col-sm-3" id="stories">
+          <div class="inner" >
+	    <fieldset id="news">
+	      <legend>Financial Stories</legend>
+	    </fieldset>
+	  </div>
+        </div>
       </div>
     </div>
     <footer>

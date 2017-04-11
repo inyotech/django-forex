@@ -1,5 +1,16 @@
+body {
+    background: #87aec5
+}
+
+.container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: white;
+}
+
 #currency-table table {
-    margin-bottom: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 #currency-table td {
@@ -91,4 +102,30 @@
 
 #controls {
     text-align: center;
+}
+
+fieldset#news legend {
+    font-size: initial;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #777;
+    text-align: left;
+}
+
+
+#stories {
+    border-left: 1px solid #e5e5e5;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #aaa;
+    border-color: #aaa;
 }
