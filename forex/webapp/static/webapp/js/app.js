@@ -12,7 +12,7 @@ var stories = null;
 function load_current() {
 
     return $.ajax({
-        url: '/current_rates/base/' + base_code + '/',
+        url: 'current_rates/base/' + base_code + '/',
         success: function(response) {
 	    current_rates = response;
         }
@@ -22,7 +22,7 @@ function load_current() {
 function load_historic() {
 
     return $.ajax({
-	url: '/historic_rates/base/' + base_code + '/target/' + target_code + '/months/' + months_history,
+	url: 'historic_rates/base/' + base_code + '/target/' + target_code + '/months/' + months_history,
         success: function(response) {
             historic_rates = response;
         }
@@ -32,7 +32,7 @@ function load_historic() {
 
 function load_stories() {
     return $.ajax({
-        url: '/stories/10/',
+        url: 'stories/10/',
         success: function(response) {
             stories = response;
         }

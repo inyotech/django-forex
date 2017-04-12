@@ -58,7 +58,7 @@ function show_current() {
     var cells = rows.selectAll('td').data(function(d) {
         return [
             '<input type="radio" name="target-currency-select" class="target-select" id="' + d.currency_code + '" />',
-            '<img src="/static/rates/images/' + d.flag_image_file_name + '" />',
+            '<img src="static/rates/images/' + d.flag_image_file_name + '" />',
             d.country_name,
             d.currency_name,
             d3.format('.2f')(d.rate_ratio)
