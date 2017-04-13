@@ -1,0 +1,138 @@
+body {
+    background: #87aec5;
+}
+
+.container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+table#latest-rates {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table#latest-rates td {
+    padding: 0px;
+    margin: 0px;
+}
+
+table#latest-rates td.flag {
+    padding-left: 10px;
+}
+
+table#latest-rates td.currency-rate {
+    padding-right: 10px;
+    text-align: right;
+}
+
+table#latest-rates td.country-name {
+    padding-left: 10px;
+    text-align: left;
+}
+
+table#latest-rates td.currency-name {
+    padding-left: 10px;
+    text-align: left;
+}
+
+table#latest-rates td.currency-rate {
+    padding-left: 10px;
+    text-align: left;
+}
+
+table#latest-rates .flag img {
+    width: 20px;
+    height:15px;
+    vertical-align: middle;
+}
+
+table#latest-rates td {
+    padding-left: 10px;
+    text-align: left;
+}
+
+table#latest-rates tr td img {
+    width: 20px;
+    height:15px;
+    vertical-align: middle;
+}
+
+#base-currency-select {
+    margin: 20px auto;
+}
+
+.sidebar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+/* override bootstrap default */
+#historic-table .table>tbody+tbody {
+    border-top: inherit;
+}
+
+#historic-table tbody {
+    margin-left: 4px;
+}
+
+#historic-table table td.date {
+    border-left: 1px solid #ddd;
+}
+
+#historic-table table td.rate {
+    border-right: 1px solid #ddd;
+}
+
+#historic-table table tbody tr:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+#historic-table table {
+    width: auto;
+    margin: 0 auto;
+}
+
+#historic-table svg {
+    display: block;
+    margin: 20px auto;
+}
+
+#historic-table tfoot td {
+    border: none;
+}
+
+#controls {
+    text-align: center;
+}
+
+fieldset#news legend {
+    font-size: initial;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #777;
+    text-align: left;
+}
+
+#stories {
+    border-left: 1px solid #e5e5e5;
+    margin-top: 40px;
+}
+
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #aaa;
+    border-color: #aaa;
+}
