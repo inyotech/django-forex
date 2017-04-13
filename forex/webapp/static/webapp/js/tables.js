@@ -1,6 +1,6 @@
 function show_current() {
 
-    var columns = 4;
+    var columns = 3;
     var col_length = Math.ceil(current_rates.data.length/columns);
     var columnized_data = [];
 
@@ -59,7 +59,7 @@ function show_current() {
         return [
             '<input type="radio" name="target-currency-select" class="target-select" id="' + d.currency_code + '" />',
             '<img src="static/rates/images/' + d.flag_image_file_name + '" />',
-            d.country_name,
+            d.short_name,
             d.currency_name,
             d3.format('.2f')(d.rate_ratio)
         ];
@@ -163,7 +163,7 @@ function show_historic_table(page) {
 
 function paginate_historic_rates() {
 
-    var columns = 5;
+    var columns = 4;
     var page_length = 10;
     var column_data = [];
 

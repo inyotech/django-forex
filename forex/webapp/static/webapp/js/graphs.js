@@ -1,7 +1,7 @@
 function show_historic_graph() {
 
-    var margin = {top: 30, right: 20, bottom: 20, left: 50},
-        width = 700 - margin.left - margin.right,
+    var margin = {top: 30, right: 20, bottom: 20, left: 30},
+        width = 600 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
     var parseDate = d3.timeParse("%Y-%m-%d");

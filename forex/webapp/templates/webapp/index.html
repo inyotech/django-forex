@@ -36,52 +36,50 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-12" id="currency-table">
+        <div class="col-lg-9" id="currency-table">
           <div class="inner">
 	    <table id="latest-rates"><caption>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</caption></table>
           </div>
-        </div>
-      </div>
-      <div class="row">
-	<div class="col-sm-9" id="historic-table">
-          <div class="inner" >
-          <svg></svg>
-          <div id="controls" >
-            <div id="base-currency-select" >Base Currency:
-              <select class="currency-select" >
-                {% for currency in currencies %}
-                <option value="{{currency.currency_code}}" {% if currency.currency_code == 'EUR' %} selected="selected" {% endif %} >
-                  {{currency.short_name}} {{currency.currency_name}}
-                </option>
-                {% endfor %}
-              </select>
+          <div id="historic-table">
+            <div class="inner" >
+              <svg class="hidden-sm"></svg>
+              <div id="controls" >
+                <div id="base-currency-select" >Base Currency:
+                  <select class="currency-select" >
+                    {% for currency in currencies %}
+                    <option value="{{currency.currency_code}}" {% if currency.currency_code == 'EUR' %} selected="selected" {% endif %} >
+                      {{currency.short_name}} {{currency.currency_name}}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+	        <div id="timespan-select" >Time Range:
+	          6 months
+	          <input type="radio" name="timespan-select-button" value="6">
+	          1 year
+	          <input type="radio" name="timespan-select-button" value="12">
+	          2 years
+	          <input type="radio" name="timespan-select-button" value="24" checked="checked">
+	          3 years
+	          <input type="radio" name="timespan-select-button" value="36">
+	          5 years
+	          <input type="radio" name="timespan-select-button" value="60">
+	        </div>
+              </div>
+              <table id="historic-rates" class="table table-striped" >
+                <caption>Tabular Data</caption>
+                <tfoot>
+                  <tr>
+                    <td>
+                      <ul id="pagination-demo" class="pagination-sm pagination" ></ul>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
-	    <div id="timespan-select" >Time Range:
-	      6 months
-	      <input type="radio" name="timespan-select-button" value="6">
-	      1 year
-	      <input type="radio" name="timespan-select-button" value="12">
-	      2 years
-	      <input type="radio" name="timespan-select-button" value="24" checked="checked">
-	      3 years
-	      <input type="radio" name="timespan-select-button" value="36">
-	      5 years
-	      <input type="radio" name="timespan-select-button" value="60">
-	    </div>
-          </div>
-          <table id="historic-rates" class="table table-striped" >
-            <caption>Tabular Data</caption>
-            <tfoot>
-              <tr>
-                <td>
-                  <ul id="pagination-demo" class="pagination-sm pagination" ></ul>
-                </td>
-              </tr>
-            </tfoot>
-          </table>
-          </div>
-	</div>
-	<div class="col-sm-3" id="stories">
+	  </div>
+        </div>
+	<div class="col-lg-3" id="stories">
           <div class="inner" >
 	    <fieldset id="news">
 	      <legend>Financial Stories</legend>

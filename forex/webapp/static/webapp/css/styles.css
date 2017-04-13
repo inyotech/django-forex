@@ -1,5 +1,5 @@
 body {
-    background: #87aec5
+    background: #87aec5;
 }
 
 .container {
@@ -8,52 +8,54 @@ body {
     background: white;
 }
 
-#currency-table table {
+table#latest-rates {
     margin-top: 40px;
     margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#currency-table td {
+table#latest-rates td {
     padding: 0px;
     margin: 0px;
 }
 
-#currency-table td.flag {
+table#latest-rates td.flag {
     padding-left: 10px;
 }
 
-#currency-table td.currency-rate {
+table#latest-rates td.currency-rate {
     padding-right: 10px;
     text-align: right;
 }
 
-#currency-table td.country-name {
+table#latest-rates td.country-name {
     padding-left: 10px;
     text-align: left;
 }
 
-#currency-table td.currency-name {
+table#latest-rates td.currency-name {
     padding-left: 10px;
     text-align: left;
 }
 
-#currency-table td.currency-rate {
+table#latest-rates td.currency-rate {
     padding-left: 10px;
     text-align: left;
 }
 
-#currency-table .flag img {
+table#latest-rates .flag img {
     width: 20px;
     height:15px;
     vertical-align: middle;
 }
 
-#currency-table #latest-rates td {
+table#latest-rates td {
     padding-left: 10px;
     text-align: left;
 }
 
-#currency-table #latest-rates tr td img {
+table#latest-rates tr td img {
     width: 20px;
     height:15px;
     vertical-align: middle;
@@ -100,6 +102,10 @@ body {
     margin: 20px auto;
 }
 
+#historic-table tfoot td {
+    border: none;
+}
+
 #controls {
     text-align: center;
 }
@@ -112,10 +118,11 @@ fieldset#news legend {
     text-align: left;
 }
 
-
 #stories {
     border-left: 1px solid #e5e5e5;
+    margin-top: 40px;
 }
+
 
 .pagination>.active>a,
 .pagination>.active>a:focus,
