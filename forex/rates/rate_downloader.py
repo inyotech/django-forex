@@ -1,4 +1,3 @@
-import sys
 import io
 import csv
 import copy
@@ -9,20 +8,20 @@ import requests
 
 class Downloader:
 
-    rates_url = 'https://www.federalreserve.gov/datadownload/Output.aspx?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&from=3/01/2012&to=04/10/2017&filetype=csv&label=include&layout=seriescolumn'
+    rates_url = 'https://www.federalreserve.gov/datadownload/Output.aspx?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&from=%(start)s&to=%(end)s&filetype=csv&label=include&layout=seriescolumn'
 
     def __init__(self):
         self.raw_rate_data = None
-        pass
 
-    def retreive_rates(self):
-    
-        self.raw_rate_data = requests.get(self.rates_url)
+    def retrieve_rates(self, start_date, end_date):
+
+        url = self.rates_url % {'start': start_date, 'end': end_date}
+        self.raw_rate_data = requests.get(url)
 
     def iterate_rates(self):
 
         rate_data = io.StringIO(copy.copy(self.raw_rate_data.text))
-        
+
         h10_ids = None
         reader = csv.reader(rate_data)
         for row in reader:
@@ -39,20 +38,20 @@ class Downloader:
                     break
             except Exception as e:
                 pprint.pprint(e)
-                
+
         for row in reader:
 
             rate_date = datetime.datetime.strptime(row.pop(0), '%Y-%m-%d').date()
-            
+
             r = {
                 'h10_id': 'RXI_N.B.US',
                 'rate_date': rate_date,
                 'per_dollar': 1.0,
             }
             yield r
-            
+
             row = dict(zip(h10_ids, row))
-            
+
             for h10_id, per_dollar in row.items():
                 if per_dollar == 'ND':
                     continue
@@ -61,13 +60,13 @@ class Downloader:
                     h10_id = h10_id.replace('$US', '')
                 else:
                     per_dollar = float(per_dollar)
-                    
+
                 r = {
                     'h10_id': h10_id,
                     'rate_date': rate_date,
                     'per_dollar': per_dollar,
                 }
-                    
+
                 yield r
 
 if __name__ == '__main__':
@@ -75,8 +74,6 @@ if __name__ == '__main__':
     downloader = Downloader()
 
     downloader.retreive_rates()
-    
+
     for rate in downloader.iterate_rates():
         pprint.pprint(rate)
-
-    
