@@ -1,9 +1,11 @@
+import io
 import copy
 import datetime
+import csv
 import pprint
 
 from django.core.paginator import Paginator
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.db import connection
 
 def execute_query(sql, query_params):
@@ -117,6 +119,9 @@ def historic_rates(request, base='USD', target='EUR', months=24, page=None, per_
         'data': data,
     }
 
+    if request.GET.get('csv'):
+        return csv_response(response)
+
     if page:
         response['pages'] = {
             'page': page,
@@ -125,6 +130,43 @@ def historic_rates(request, base='USD', target='EUR', months=24, page=None, per_
         }
 
     return JsonResponse(response)
+
+def csv_response(response_data):
+
+    buffer = io.StringIO()
+    writer = csv.writer(buffer, quoting=csv.QUOTE_ALL)
+
+    writer.writerow(['base_currency_code', 'base_country_name', 'base_currency_name'])
+    writer.writerow([
+        response_data['base']['currency_code'],
+        response_data['base']['country_name'],
+        response_data['base']['currency_name'],
+    ])
+
+    writer.writerow([])
+
+    writer.writerow(['target_currency_code', 'target_country_name', 'target_currency_name'])
+    writer.writerow([
+        response_data['target']['currency_code'],
+        response_data['target']['country_name'],
+        response_data['target']['currency_name'],
+    ])
+
+    writer.writerow([])
+
+    writer.writerow(['date', 'exchange_rate'])
+    for rate in response_data['data']:
+        writer.writerow([
+            rate['rate_date'],
+            rate['rate_ratio'],
+        ])
+
+    buffer.seek(0)
+
+    response = HttpResponse(buffer, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="exchangerates.csv"'
+
+    return response
 
 def current_rates(request, base='USD'):
 

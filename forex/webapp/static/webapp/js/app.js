@@ -14,7 +14,7 @@ function load_current() {
     return $.ajax({
         url: 'current_rates/base/' + base_code + '/',
         success: function(response) {
-	    current_rates = response;
+            current_rates = response;
         }
     });
 }
@@ -22,7 +22,7 @@ function load_current() {
 function load_historic() {
 
     return $.ajax({
-	url: 'historic_rates/base/' + base_code + '/target/' + target_code + '/months/' + months_history,
+        url: 'historic_rates/base/' + base_code + '/target/' + target_code + '/months/' + months_history,
         success: function(response) {
             historic_rates = response;
         }
@@ -72,9 +72,9 @@ $(document).ready(function() {
 
     $('#base-currency-select select.currency-select').change(function() {
 
-	base_code = $(this).val();
+        base_code = $(this).val();
 
-	load_current().success(function() {
+        load_current().success(function() {
             show_current();
         });
 

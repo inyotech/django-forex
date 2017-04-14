@@ -46,7 +46,7 @@ function show_current() {
 
     rows.order();
 
-    var total_delay = 250;
+    var total_delay = 300;
     var delay_per_row = total_delay/rows.size();
 
     var i = 0;
@@ -124,7 +124,7 @@ function show_historic_table(page) {
         }
     });
 
-    var total_delay = 250;
+    var total_delay = 300;
     var delay_per_row = total_delay/rows.size();
 
     var i = 0;
@@ -158,6 +158,12 @@ function show_historic_table(page) {
             return 'rate';
         }
     });
+
+    table.select('caption a#download-link')
+        .attr('href', 'historic_rates/base/'
+            + base_code + '/target/'
+            + target_code + '/months/'
+            + months_history + '?csv=1');
 
 }
 
