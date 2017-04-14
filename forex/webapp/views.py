@@ -1,10 +1,9 @@
 import pprint
 from django.shortcuts import render
 from django.db.models import Max, F
-from django import forms
 from django.db import connection
 
-from rates.models import Rate, Currency, RateRatio
+from rates.models import Rate, Currency
 
 def index(request, base='USD', target='EUR', months=24):
 

@@ -8,19 +8,29 @@ import requests
 
 class Downloader:
 
-    rates_url = 'https://www.federalreserve.gov/datadownload/Output.aspx?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&from=%(start)s&to=%(end)s&filetype=csv&label=include&layout=seriescolumn'
+    rates_url = ('https://www.federalreserve.gov/datadownload/Output.aspx'
+                 '?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&'
+                 'from=%(start)s&to=%(end)s'
+                 '&filetype=csv&label=include&layout=seriescolumn')
 
-    def __init__(self):
-        self.raw_rate_data = None
+    def __init__(self,  start_date=None, end_date=None):
 
-    def retrieve_rates(self, start_date, end_date):
+        if not end_date:
+            self.end_date = datetime.datetime.now().date()
+        else:
+            self.end_date = end_date
 
-        url = self.rates_url % {'start': start_date, 'end': end_date}
-        self.raw_rate_data = requests.get(url)
+        if not start_date:
+            self.start_date = self.end_date - datetime.timedelta(days=10)
+        else:
+            self.start_date = start_date
 
     def iterate_rates(self):
 
-        rate_data = io.StringIO(copy.copy(self.raw_rate_data.text))
+        url = self.rates_url % {'start': self.start_date, 'end': self.end_date}
+        raw_rate_data = requests.get(url)
+
+        rate_data = io.StringIO(copy.copy(raw_rate_data.text))
 
         h10_ids = None
         reader = csv.reader(rate_data)
@@ -72,8 +82,6 @@ class Downloader:
 if __name__ == '__main__':
 
     downloader = Downloader()
-
-    downloader.retreive_rates()
 
     for rate in downloader.iterate_rates():
         pprint.pprint(rate)

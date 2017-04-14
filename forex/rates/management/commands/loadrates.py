@@ -41,9 +41,7 @@ class Command(BaseCommand):
 
         pprint.pprint(currency_map)
 
-        downloader = rate_downloader.Downloader()
-
-        downloader.retrieve_rates(start_date=options['start_date'], end_date=options['end_date'])
+        downloader = rate_downloader.Downloader(start_date=options['start_date'], end_date=options['end_date'])
 
         pprint.pprint(downloader)
 

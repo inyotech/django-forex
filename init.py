@@ -16,7 +16,7 @@ from rates.models import Currency, Rate
 
 with open('countries.txt') as f:
 
-    reader = csv.DictReader(f)
+    reader = csv.DictReader(f, skipinitialspace=True)
 
     for row in reader:
 
@@ -24,6 +24,3 @@ with open('countries.txt') as f:
         c = Currency(**row)
         c.save()
         
-#currencies = Currency.objects.all()
-
-#pprint.pprint(currencies)
