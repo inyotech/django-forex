@@ -74,7 +74,7 @@ body {
 #histories table {
     font-size: 90%;
     width: auto;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 #histories tbody {
@@ -100,6 +100,10 @@ body {
 
 #histories tfoot td {
     border: none;
+}
+
+#histories table caption {
+    text-align: center;
 }
 
 #controls {
@@ -131,4 +135,10 @@ fieldset#news legend {
     cursor: default;
     background-color: #aaa;
     border-color: #aaa;
+}
+
+footer#page-foot {
+    font-size: 80%;
+    text-align: center;
+    margin-bottom: 20px;
 }

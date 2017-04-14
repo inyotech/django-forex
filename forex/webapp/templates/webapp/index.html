@@ -2,15 +2,16 @@
 {% load format_rates %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 
     {% block title %}<title>Foreign Exchange Rates</title>{% endblock %}
-    <base href="{% url 'index' %}" />
+    <base href="{% url 'index' %}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css"/>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -24,78 +25,85 @@
     <!-- Add additional CSS in static file -->
     <link rel="stylesheet" href="{% static 'webapp/css/styles.css' %}">
     <style>
-      .line {
-          fill: none;
-          stroke: steelblue;
-          stroke-width: 2px;
-      }
+        .line {
+            fill: none;
+            stroke: steelblue;
+            stroke-width: 2px;
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="container">
-      <div class="row">
+<div class="container">
+    <div class="row">
         <div class="col-sm-12">
             <h3 class="text-center">Daily Currency Exchange Rates</h3>
             <h4 class="text-center">Sourced from the US Federal Reserve System</h4>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-9" id="currencies">
-          <div class="inner">
-	    <table id="latest-rates"><caption>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</caption></table>
-          </div>
-          <div id="histories">
-            <div class="inner" >
-              <svg class="hidden-sm hidden-xs"></svg>
-              <div id="controls" >
-                <div id="base-currency-select" >Base Currency:
-                  <select class="currency-select" >
-                    {% for currency in currencies %}
-                    <option value="{{currency.currency_code}}" {% if currency.currency_code == 'EUR' %} selected="selected" {% endif %} >
-                      {{currency.short_name}} {{currency.currency_name}}
-                    </option>
-                    {% endfor %}
-                  </select>
-                </div>
-	        <div id="timespan-select" >Time Range:
-	          6 months
-	          <input type="radio" name="timespan-select-button" value="6">
-	          1 year
-	          <input type="radio" name="timespan-select-button" value="12">
-	          2 years
-	          <input type="radio" name="timespan-select-button" value="24" checked="checked">
-	          3 years
-	          <input type="radio" name="timespan-select-button" value="36">
-	          5 years
-	          <input type="radio" name="timespan-select-button" value="60">
-	        </div>
-              </div>
-              <table id="historic-rates" class="table table-striped" >
-                <caption>Tabular Data <a id="download-link">Download as CSV</a></caption>
-                <tfoot>
-                  <tr>
-                    <td>
-                      <ul id="pagination-demo" class="pagination-sm pagination" ></ul>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-	  </div>
-        </div>
-	<div class="col-sm-3" id="stories">
-          <div class="inner" >
-	    <fieldset id="news">
-	      <legend>Financial Stories</legend>
-	    </fieldset>
-	  </div>
-        </div>
-      </div>
     </div>
-    <footer>
-    </footer>
-    {% block javascript %}{% endblock %}
-  </body>
+    <div class="row">
+        <div class="col-sm-9" id="currencies">
+            <div class="inner">
+                <table id="latest-rates">
+                    <caption>Global Exchange Rates based on {{ base_rate.currency.short_name }}
+                        {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}
+                    </caption>
+                </table>
+            </div>
+            <div id="histories">
+                <div class="inner">
+                    <svg class="hidden-sm hidden-xs"></svg>
+                    <div id="controls">
+                        <div id="base-currency-select">Base Currency:
+                            <select class="currency-select">
+                                {% for currency in currencies %}
+                                <option value="{{currency.currency_code}}" {% if currency.currency_code == 'EUR' %}
+                                    selected="selected" {% endif %} >{{currency.short_name}} {{currency.currency_name}}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div id="timespan-select">Time Range:
+                            6 months
+                            <input type="radio" name="timespan-select-button" value="6">
+                            1 year
+                            <input type="radio" name="timespan-select-button" value="12">
+                            2 years
+                            <input type="radio" name="timespan-select-button" value="24" checked="checked">
+                            3 years
+                            <input type="radio" name="timespan-select-button" value="36">
+                            5 years
+                            <input type="radio" name="timespan-select-button" value="60">
+                        </div>
+                    </div>
+                    <table id="historic-rates" class="table table-striped">
+                        <caption><a id="download-link">Download tablular rates as CSV</a></caption>
+                        <tfoot>
+                        <tr>
+                            <td>
+                                <ul id="pagination-demo" class="pagination-sm pagination"></ul>
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" id="stories">
+            <div class="inner">
+                <fieldset id="news">
+                    <legend>Financial Stories</legend>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <footer id="page-foot">
+                &copy; Copyright 2009-20017 Inyo Technical Services
+            </footer>
+        </div>
+    </div>
+</body>
 </html>
