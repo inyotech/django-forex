@@ -28,26 +28,16 @@ class Command(BaseCommand):
         if not options['start_date']:
             options['start_date'] = options['end_date'] - datetime.timedelta(days=10)
 
-        pprint.pprint(options)
-
         all_currencies = Currency.objects.all()
-
-        pprint.pprint(all_currencies)
 
         currency_map = {}
 
         for currency in all_currencies:
             currency_map[currency.h10_id] = currency
 
-        pprint.pprint(currency_map)
-
         downloader = rate_downloader.Downloader(start_date=options['start_date'], end_date=options['end_date'])
-
-        pprint.pprint(downloader)
 
         with transaction.atomic():
             for rate in downloader.iterate_rates():
-                pprint.pprint(rate)
                 currency = currency_map[rate['h10_id']]
-                pprint.pprint(currency)
                 Rate.objects.update_or_create({'per_dollar': rate['per_dollar']}, currency=currency, rate_date=rate['rate_date'])

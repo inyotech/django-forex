@@ -1,2 +1,0 @@
-https://www.federalreserve.gov/datadownload/Output.aspx?rel=H10&series=43572f5adbac30c0ef4bcc6ce04726bb&lastobs=&from=01/01/2016&to=03/28/2017&filetype=csv&label=include&layout=seriescolumn
-

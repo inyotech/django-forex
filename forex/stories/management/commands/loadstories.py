@@ -44,5 +44,4 @@ class Command(BaseCommand):
                 else:
                     print('story %s exists' % (story.title,))
 
-
             Story.objects.filter(created_date__lt=keep_threshold).delete()

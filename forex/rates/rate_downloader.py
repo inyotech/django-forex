@@ -30,6 +30,10 @@ class Downloader:
         url = self.rates_url % {'start': self.start_date, 'end': self.end_date}
         raw_rate_data = requests.get(url)
 
+        raw_rate_data.raise_for_status()
+
+        print('Retrieved exchange rates from %s' % (url,))
+
         rate_data = io.StringIO(copy.copy(raw_rate_data.text))
 
         h10_ids = None
@@ -40,9 +44,8 @@ class Downloader:
                 if row_id == 'unique identifier:':
                     for value in row[1:]:
                         id = value.split('/')[2]
-                        print(id)
                 elif row_id == 'multiplier:':
-                    print('multipliers')
+                    pass
                 elif row_id == 'time period':
                     h10_ids = tuple(row[1:])
                     break
@@ -52,6 +55,8 @@ class Downloader:
         for row in reader:
 
             rate_date = datetime.datetime.strptime(row.pop(0), '%Y-%m-%d').date()
+
+            print('Adding rates for %s' % (rate_date,))
 
             r = {
                 'h10_id': 'RXI_N.B.US',
