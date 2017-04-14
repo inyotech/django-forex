@@ -19,9 +19,14 @@ rate data.
 
 ## Installation
 
+1. Clone this repository.
+
 ```
-$ git clone
+$ git clone https://github.com/inyotech/django-forex
 ```
+
+2. (optional) create and activate a local python virtual environment
+for python dependencies.
 
 ```
 $ python -m venv venv
@@ -29,9 +34,13 @@ $ python -m venv venv
 $ source venv/bin/activate
 ```
 
+3. Install the required packages.
+
 ```
-(venv)$ pip install -r forex/requirements.txt
+$ pip install -r requirements.txt
 ```
+
+4. Configure the settings.
 
 ```
 $ pushd forex/forex
@@ -40,7 +49,8 @@ $ cp settings.py.dist settings.py
 $ popd
 ```
 
+5. Initialize the application database and download data.
+
 ```
 $ python initialize.py
 ```
-
