@@ -8,7 +8,7 @@ function show_current() {
         columnized_data.push(current_rates.data.slice(i, i+col_length));
     }
 
-    var table = d3.select('#currency-table').selectAll('table#latest-rates');
+    var table = d3.select('#currencies').selectAll('table#latest-rates');
 
     var base_name = current_rates.base.short_name + ' ' + current_rates.base.currency_name;
     table.select('caption')
@@ -94,7 +94,7 @@ function show_current() {
 
 function show_historic_table(page) {
 
-    var table = d3.select('#historic-table').selectAll('table#historic-rates');
+    var table = d3.select('#histories').selectAll('table#historic-rates');
 
     var tbodies = table.selectAll('tbody').data(paginated_historic_rates[page-1]);
 

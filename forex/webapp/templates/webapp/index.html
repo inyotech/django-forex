@@ -36,11 +36,17 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-9" id="currency-table">
+        <div class="col-sm-12">
+            <h3 class="text-center">Daily Currency Exchange Rates</h3>
+            <h4 class="text-center">Sourced from the US Federal Reserve System</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-9" id="currencies">
           <div class="inner">
 	    <table id="latest-rates"><caption>Global Exchange Rates based on {{ base_rate.currency.short_name }} {{ base_rate.currency.currency_name }} {{ base_rate.rate_date }}</caption></table>
           </div>
-          <div id="historic-table">
+          <div id="histories">
             <div class="inner" >
               <svg class="hidden-sm hidden-xs"></svg>
               <div id="controls" >

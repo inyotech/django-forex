@@ -1,3 +1,7 @@
+.idea
+.DS_Store
+
 venv/
 __pycache__/
+
 forex/db.sqlite3

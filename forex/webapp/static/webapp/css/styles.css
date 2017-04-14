@@ -8,55 +8,49 @@ body {
     background: white;
 }
 
-table#latest-rates {
-    font-size: 90%;
-    margin-top: 40px;
+#currencies {
+    margin-top: 20px;
     margin-bottom: 40px;
+}
+
+#currencies table#latest-rates {
+    font-size: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
-table#latest-rates td {
+#currencies table#latest-rates td {
     padding: 0px;
+    padding-left: 10px;
     margin: 0px;
+    text-align: left;
 }
 
-table#latest-rates td.flag {
+#currencies table#latest-rates td.flag {
     padding-left: 10px;
 }
 
-table#latest-rates td.currency-rate {
+#currencies table#latest-rates td.currency-rate {
     padding-right: 10px;
     text-align: right;
 }
 
-table#latest-rates td.country-name {
+#currencies table#latest-rates td.country-name {
     padding-left: 10px;
     text-align: left;
 }
 
-table#latest-rates td.currency-name {
+#currencies table#latest-rates td.currency-name {
     padding-left: 10px;
     text-align: left;
 }
 
-table#latest-rates td.currency-rate {
+#currencies table#latest-rates td.currency-rate {
     padding-left: 10px;
     text-align: left;
 }
 
-table#latest-rates .flag img {
-    width: 20px;
-    height:15px;
-    vertical-align: middle;
-}
-
-table#latest-rates td {
-    padding-left: 10px;
-    text-align: left;
-}
-
-table#latest-rates tr td img {
+#currencies table#latest-rates td img {
     width: 20px;
     height:15px;
     vertical-align: middle;
@@ -72,39 +66,39 @@ table#latest-rates tr td img {
     list-style: none;
 }
 
-/* override bootstrap default */
-#historic-table .table>tbody+tbody {
-    border-top: inherit;
+#histories svg {
+    display: block;
+    margin: 20px auto;
 }
 
-#historic-table tbody {
-    margin-left: 4px;
-}
-
-#historic-table table td.date {
-    border-left: 1px solid #ddd;
-}
-
-#historic-table table td.rate {
-    border-right: 1px solid #ddd;
-}
-
-#historic-table table tbody tr:last-child {
-    border-bottom: 1px solid #ddd;
-}
-
-#historic-table table {
+#histories table {
     font-size: 90%;
     width: auto;
     margin: 0 auto;
 }
 
-#historic-table svg {
-    display: block;
-    margin: 20px auto;
+#histories tbody {
+    margin-left: 4px;
 }
 
-#historic-table tfoot td {
+/* override bootstrap default */
+#histories .table>tbody+tbody {
+    border-top: inherit;
+}
+
+#histories table td.date {
+    border-left: 1px solid #ddd;
+}
+
+#histories table td.rate {
+    border-right: 1px solid #ddd;
+}
+
+#histories table tbody tr:last-child {
+    border-bottom: 1px solid #ddd;
+}
+
+#histories tfoot td {
     border: none;
 }
 
@@ -121,11 +115,10 @@ fieldset#news legend {
 }
 
 #stories {
+    margin-top: 20px;
     font-size: 90%;
     border-left: 1px solid #e5e5e5;
-    margin-top: 40px;
 }
-
 
 .pagination>.active>a,
 .pagination>.active>a:focus,
