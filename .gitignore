@@ -5,3 +5,5 @@ venv/
 __pycache__/
 
 forex/db.sqlite3
+
+forex/forex/settings.py
