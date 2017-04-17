@@ -1,0 +1,7 @@
+LOG=/usr/bin/logger
+
+DAILY_LOAD=/home/inyotech/webapps/django_forex/bin/daily_load.sh
+
+# min	hr	day	mon	week	command
+0       */6     *       *       *       $DAILY_LOAD 2>&1 | /usr/bin/logger -t daily_load
+
