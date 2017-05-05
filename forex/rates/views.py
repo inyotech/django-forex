@@ -58,7 +58,7 @@ class PaginatorObjectList:
 
             return self.execute(start=start, end=stop)
 
-        return self.execute(limit=key+1, offset=key)
+        return self.execute(start=key, end=key+1)
 
     def execute(self, start=0, end=None):
 
