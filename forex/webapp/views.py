@@ -1,4 +1,3 @@
-import pprint
 from django.shortcuts import render
 from django.db.models import Max, F
 from django.db import connection
@@ -15,17 +14,9 @@ def index(request, base='USD', target='EUR', months=24):
 
     latest_rate_date = Rate.objects.all().aggregate(Max('rate_date'))
 
-    pprint.pprint(latest_rate_date)
-
     base_rate = Rate.objects.all().filter(currency__currency_code=base_currency_code).filter(rate_date=latest_rate_date['rate_date__max']).select_related().first()
 
-    pprint.pprint(base_rate)
-
     rates = Rate.objects.all().filter(rate_date=latest_rate_date['rate_date__max']).annotate(ratio=F('per_dollar')/base_rate.per_dollar).select_related().order_by('currency__country_name')
-
-    pprint.pprint(rates)
-
-    pprint.pprint(connection.queries)
 
     return render(request, 'webapp/index.html', context={
         'currencies': currencies,
