@@ -45,7 +45,7 @@ $ pip install -r requirements.txt
 ```
 $ pushd forex/forex
 $ cp settings.py.dist settings.py
-# Edit settins.py as required
+# Edit settings.py as required
 $ popd
 ```
 
